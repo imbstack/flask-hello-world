@@ -36,7 +36,7 @@ async def tick():
 
 async def main():
     await runner.setup()
-    site = web.TCPSite(runner, 'localhost', 8080)
+    site = web.TCPSite(runner, '127.0.0.1', 8080)
     await site.start()
     while True:
         await tick()
