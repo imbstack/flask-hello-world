@@ -28,11 +28,11 @@ def disconnect(sid):
 app.router.add_get('/', index)
 
 async def tick():
-    tt = datetime.now().isoformat()
-    await sio.emit('tick', {'data': tt})
-    print(tt)
-    await asyncio.sleep(2)
-    await tick()
+    while True:
+        tt = datetime.now().isoformat()
+        await sio.emit('tick', {'data': tt})
+        print(tt)
+        await asyncio.sleep(2)
 
 async def main():
     await runner.setup()
