@@ -3,7 +3,7 @@ import socketio
 from datetime import datetime
 import asyncio
 
-sio = socketio.AsyncServer()
+sio = socketio.AsyncServer(cors_allowed_origins = '*')
 app = web.Application()
 runner = web.AppRunner(app)
 sio.attach(app)
