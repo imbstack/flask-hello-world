@@ -5,6 +5,10 @@
     var start = null;
     socket.on('connect', function() {
         socket.emit('my event', {data: 'I\'m connected!'});
+        console.log('Connected!')
+    });
+    socket.on('disconnect', function() {
+        console.log('Disconnected!!')
     });
     socket.on('tick', function(evt) {
         var ttt = new Date(evt.data);
