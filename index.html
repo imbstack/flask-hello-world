@@ -3,25 +3,29 @@
 <script type="text/javascript" charset="utf-8">
     var socket = io({ transports: ["websocket"] });
     var start = null;
+    var now = null;
     socket.on('connect', function() {
         socket.emit('my event', {data: 'I\'m connected!'});
         console.log('Connected!')
+        if (now != null) {
+            start = now;
+        }
     });
     socket.on('disconnect', function() {
         console.log('Disconnected!!')
     });
     socket.on('tick', function(evt) {
-        var ttt = new Date(evt.data);
+        var now = new Date(evt.data);
         if (start == null) {
-            start = ttt;
+            start = now;
         }
         var node = document.getElementById("FOO");
-        node.innerHTML = (ttt - start)/1000;
-        console.log(ttt - start);
+        node.innerHTML = (now - start)/1000;
+        console.log(now - start);
     });
 </script>
 </head>
 
 <body>
-    Seconds between connection and final tick event: <p id="FOO">TIME</p>
+    Seconds between (re)connection and current tick event: <p id="FOO">TIME</p>
 </body>
